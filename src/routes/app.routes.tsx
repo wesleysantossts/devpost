@@ -18,12 +18,15 @@ function StackRoutes() {
     {
       name: 'HomeTab',
       component: Home,
+      options: {
+        headerShown: false,
+      },
     },
     {
       name: 'NewPost',
       component: NewPost,
       options: {
-        title: 'New Post',
+        title: 'Novo Post',
         headerTintColor: '#fff',
         headerStyle: {backgroundColor: '#36393f'},
       },
