@@ -52,6 +52,7 @@ export default function NewPost() {
 
     if (postCreated) {
       console.log('Post criado com sucesso');
+      navigation.goBack();
     }
   }
 
