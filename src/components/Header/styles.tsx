@@ -5,6 +5,7 @@ export const Container = styled.SafeAreaView`
   height: 80px;
   background-color: #353840;
   padding-bottom: 15px;
+  padding-top: 8px;
   border-bottom-width: 1px;
   border-bottom-color: #c7c7c7;
   justify-content: center;

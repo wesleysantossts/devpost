@@ -35,7 +35,7 @@ export default function NewPost() {
         .ref('users')
         .child(user?.uid)
         .getDownloadURL();
-      avatarUrl = response;
+      avatarUrl = 'https://sujeitoprogramador.com/steve.png';
     } catch (error) {
       avatarUrl = null;
       console.log(error);

@@ -25,7 +25,7 @@ export default function Home() {
       const postsDb: any = await firestore()
         .collection('posts')
         .orderBy('created', 'desc')
-        .limit(5)
+        .limit(6)
         .get();
 
       if (isActive) {
@@ -49,6 +49,7 @@ export default function Home() {
     }
   }
 
+  // Buscar mais quando puxar a lista pra cima
   async function handleRefreshPosts() {
     try {
       setLoadingRefresh(true);
@@ -68,14 +69,46 @@ export default function Home() {
         });
       });
 
-      setEmptyList(false);
       setPosts(postList);
+      setEmptyList(false);
       setLastItem(postsDb.docs[postsDb.docs.length - 1]);
       setLoading(false);
       setLoadingRefresh(false);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  // Buscar mais posts ao chegar no final da lista
+  async function getListPosts() {
+    if (emptyList) {
+      setLoading(false);
+      return null;
+    }
+
+    if (loading) {
+      return;
+    }
+
+    const postsDb: any = await firestore()
+      .collection('posts')
+      .orderBy('created', 'desc')
+      .limit(6)
+      .startAfter(lastItem)
+      .get();
+
+    const postList: any[] = [];
+    postsDb.docs.map((item: any) => {
+      postList.push({
+        ...item.data(),
+        id: item.id,
+      });
+    });
+
+    setEmptyList(!!postsDb.empty);
+    setLastItem(postsDb.docs[postsDb.docs.length - 1]);
+    setPosts((old: any) => [...old, ...postList]);
+    setLoading(false);
   }
 
   // Só vai ser chamado se for a primeira renderização OU se o usuário sair da tela e entrar na tela de novo
@@ -106,6 +139,8 @@ export default function Home() {
           )}
           refreshing={loadingRefresh}
           onRefresh={handleRefreshPosts}
+          onEndReached={() => getListPosts()}
+          onEndReachedThreshold={0.1}
         />
       )}
       <ButtonPost
