@@ -54,3 +54,30 @@ export const Avatar = styled.Image`
   border-radius: 80px;
   opacity: 0.9;
 `;
+export const ModalContainer = styled.KeyboardAvoidingView`
+  width: 100%;
+  height: 80%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+`;
+export const ButtonBack = styled.TouchableOpacity`
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+export const Input = styled.TextInput`
+  width: 80%;
+  height: 60px;
+  margin: 0 0 20px 0;
+  background-color: #ccc;
+  border-radius: 12px;
+  font-size: 18px;
+  padding: 0 15px;
+  text-align: center;
+`;

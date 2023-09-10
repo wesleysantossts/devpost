@@ -103,6 +103,8 @@ export default function AuthProvider({children}: any) {
         loadingAuth,
         loading,
         user,
+        setUser,
+        storageUser,
       }}>
       {children}
     </AuthContext.Provider>
