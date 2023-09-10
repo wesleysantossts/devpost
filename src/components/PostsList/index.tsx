@@ -85,7 +85,7 @@ export default function PostsList({data, userId}: any) {
         onPress={() =>
           navigation.navigate('PostsUser', {
             title: data.autor,
-            userId,
+            userId: data.userId,
           })
         }>
         {data.avatarUrl ? (
